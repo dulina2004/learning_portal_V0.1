@@ -100,19 +100,18 @@ var swiper = new Swiper(".reviews-slider", {
 
 // sign in process
 
-function signIn() {
+async function signIn() {
     var name = document.getElementById("username").value;
     var password = document.getElementById("password").value;
-    // alert(name);
-    // alert(password);
+    let temp = await fetch(
+        `http://localhost:8080/student/login/${name}/${password}`
+    ).then((res) => res.json());
+    console.log(temp);
 
-    if (name != "user") {
-        alert("Invalid Username");
-    } else if (password != "user") {
-        alert("Invalid Password");
-    } else {
-        // alert("success");
+    if (temp) {
         window.location = "index.html";
+    } else {
+        alert("Invalid Usename or Password");
     }
 }
 
